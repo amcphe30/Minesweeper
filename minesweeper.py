@@ -36,16 +36,20 @@ def print_mines():
 def get_mines():
     return grid
 
-def hit(r, c):
-    if grid[r][c] == 1:
-        game_over = True
-        print("game over")
-    else:
-        grid[r][c] = 2
-        print_mines()
+# def hit(r, c):
+#     if grid[r][c] == 1:
+#         game_over = True
+#         print("game over")
+#     else:
+#         grid[r][c] = 2
+#         print_mines()
 
-def click(x, y):
-    print("pressed at (" + str(x) + "," + str(y) + ")")
+# def dig(r, c):
+#     print("pressed at (" + str(r) + "," + str(c) + ")")
+#     if hit(r, c):
+#         print("hit")
+#     else:
+#         print("miss")
 
 init_mines()
 print_mines()
