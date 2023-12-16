@@ -12,7 +12,7 @@ grid = [[0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]]
-# 0 covered no mine, 1 mine, 2 uncovered no mine
+# 0 covered no mine, 1 covered mine, 2 uncovered sand, 3 uncovered mine
 
 def init_mines():
     min = 1
@@ -36,20 +36,14 @@ def print_mines():
 def get_mines():
     return grid
 
-# def hit(r, c):
-#     if grid[r][c] == 1:
-#         game_over = True
-#         print("game over")
-#     else:
-#         grid[r][c] = 2
-#         print_mines()
-
-# def dig(r, c):
-#     print("pressed at (" + str(r) + "," + str(c) + ")")
-#     if hit(r, c):
-#         print("hit")
-#     else:
-#         print("miss")
+def dig(r, c):
+   print("pressed at (" + str(r) + "," + str(c) + ")")
+   if grid[r][c] == 1:
+       grid[r][c] = 3
+       print("game over")
+   else:
+       grid[r][c] = 2
+       print("no bomb")
 
 init_mines()
 print_mines()

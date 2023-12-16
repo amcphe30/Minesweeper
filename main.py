@@ -9,11 +9,11 @@ def center_window(window, width, height):
     y = (screen_height - height) // 2
     window.geometry(f"{width}x{height}+{x}+{y}")
 
-def on_click(event):
-      print("Position = ({0},{1})".format(event.x, event.y))
-
 def on_click(x, y):
-      print("Position = " + str(x) + " " + str(y))
+      minesweeper.dig(x, y)
+      for label in labels: label.destroy()
+      draw_images()
+
 
 root = tk.Tk()
 root.title("minesweeper")
@@ -34,19 +34,29 @@ def draw_images():
     sand_image = Image.open("sand.png")
     sand_image = sand_image.resize((tile_dimension, tile_dimension))
     sand = ImageTk.PhotoImage(sand_image)
+    bomb_image = Image.open("bomb.png")
+    bomb_image = bomb_image.resize((tile_dimension, tile_dimension))
+    bomb = ImageTk.PhotoImage(bomb_image)
     onclick = lambda x, y: (lambda p: on_click(x, y))
     for r in range(minesweeper.rows):
         for c in range(minesweeper.columns):
-            if mines[r][c] == 0: # or mines[r][c] == 1:
+            if mines[r][c] == 0 or mines[r][c] == 1: # covered
                 label1 = tk.Label(image = grass)
                 label1.image = grass
                 label1.bind('<Button-1>', onclick(r, c))
-            elif mines[r][c] == 1: # 2:
+                labels.append(label1)
+            elif mines[r][c] == 2: # uncovered sand
                 label1 = tk.Label(image = sand)
                 label1.image = sand
                 label1.bind('<Button-1>', onclick(r, c))
+                labels.append(label1)
+            elif mines[r][c] == 3: # uncovered bomb
+                label1 = tk.Label(image = bomb)
+                label1.image = bomb
+                label1.bind('<Button-1>', onclick(r, c))
+                labels.append(label1)
             label1.grid(row = r, column = c)
 
-
+labels = []
 draw_images()
 root.mainloop()
