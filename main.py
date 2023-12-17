@@ -51,12 +51,12 @@ def draw_images():
     onclick = lambda x, y: (lambda p: on_click(x, y))
     for r in range(minesweeper.rows):
         for c in range(minesweeper.columns):
-            if mines[r][c] == -1 or mines[r][c] == -2: # covered
+            if minesweeper.is_covered(r, c): # covered
                 label1 = tk.Label(image = grass)
                 label1.image = grass
                 label1.bind('<Button-1>', onclick(r, c))
                 labels.append(label1)
-            elif mines[r][c] == -3: # uncovered bomb
+            elif mines[r][c] == -2: # uncovered bomb
                 label1 = tk.Label(image = bomb)
                 label1.image = bomb
                 label1.bind('<Button-1>', onclick(r, c))
