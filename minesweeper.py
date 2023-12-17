@@ -3,12 +3,12 @@ import random
 
 rows = 10
 columns = 10
-num_of_mines = rows*columns*0.1
+num_of_mines = rows*columns*0.15
 game_over = False
 num_mines_left = num_of_mines
 
 grid_vals = []
-grid_bools = []
+grid_state = []
 
 # -1 mine, otherwise num of mines around
 
@@ -18,9 +18,9 @@ def init_grid():
         row_bools = []
         for each in range(columns):
             row_vals.append(-1)
-            row_bools.append(True)
+            row_bools.append("covered")
         grid_vals.append(row_vals)
-        grid_bools.append(row_bools)
+        grid_state.append(row_bools)
 
 def init_mines():
     init_grid()
@@ -64,11 +64,14 @@ def get_mines():
     return grid_vals
 
 def is_covered(r, c):
-    return grid_bools[r][c]
+    return grid_state[r][c] == "covered"
+
+def is_flag(r, c):
+    return grid_state[r][c] == "flag"
 
 def dig(r, c):
-   if grid_bools[r][c]:
-    grid_bools[r][c] = False
+   if grid_state[r][c] == "covered":
+    grid_state[r][c] = "uncovered"
     if grid_vals[r][c] == -2:
         print("game over")
     elif (grid_vals[r][c] == 0):
@@ -78,6 +81,12 @@ def dig(r, c):
             for c in posC:
                 if r >= 0 and r < rows and c >= 0 and c < columns:
                     dig(r, c)
+
+def flag(r, c):
+    grid_state[r][c] = "flag"
+
+def unflag(r, c):
+    grid_state[r][c] = "covered"
        
 
 
