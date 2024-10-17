@@ -1,3 +1,3 @@
 # minesweeper
 
-Getting back in to python after a couple of years. I played google's minesweeper whenever I needed a break from programming in highschool, I always wondered what went in to it.
+Google's built in games are my favourite procrastination tools, Minesweeper being my most frequented. Everytime I play I wonder what the source code looks like and how I would approach it. 
